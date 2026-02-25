@@ -122,4 +122,38 @@ a:hover {
 img.socialIcon {
   height: 30px;
   width: 30px;
+  display: inline-block;
+  transition: transform 350ms cubic-bezier(.22,.94,.35,1), filter 350ms, opacity 250ms;
+  will-change: transform, filter;
+  filter: drop-shadow(0 6px 10px rgba(78,86,126,0.12));
+  /* gentle idle float so the footer feels alive */
+  animation: floatY 6s ease-in-out infinite;
+}
+
+/* Hover / focus interaction: pop up, tilt and give a lively wiggle */
+a:hover img.socialIcon,
+a:focus img.socialIcon,
+a:focus-within img.socialIcon {
+  transform: translateY(-6px) rotate(-8deg) scale(1.18);
+  filter: drop-shadow(0 12px 20px rgba(78,86,126,0.22)) saturate(1.1);
+  animation: wiggle 700ms cubic-bezier(.2,.8,.2,1);
+}
+
+/* Keyboard accessibility */
+a:focus-visible img.socialIcon {
+  outline: 3px solid rgba(78,86,126,0.15);
+  outline-offset: 4px;
+}
+
+@keyframes floatY {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(1deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+@keyframes wiggle {
+  0% { transform: translateY(-6px) rotate(-8deg) scale(1.18); }
+  30% { transform: translateY(-4px) rotate(6deg) scale(1.16); }
+  60% { transform: translateY(-6px) rotate(-4deg) scale(1.18); }
+  100% { transform: translateY(-6px) rotate(-8deg) scale(1.18); }
 }
